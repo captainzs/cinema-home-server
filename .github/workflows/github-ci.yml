@@ -19,4 +19,10 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - run: mvn clean verify --file cinema-home-client-server/pom.xml
+    - name: Build and Test Client-Server
+      run: mvn clean verify --file cinema-home-client-server/pom.xml
+      env:
+        FANART_API_KEY: ${{ secrets.FANART_API_KEY }}
+        TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+        NCORE_USERNAME: ${{ secrets.NCORE_USERNAME }}
+        NCORE_PASSWORD: ${{ secrets.NCORE_PASSWORD }}
