@@ -9,6 +9,7 @@
     </parent>
 
     <artifactId>cinema-home-client-server-assembly-ncore-transmission</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -22,4 +23,26 @@
             <version>${revision}</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>spring-boot</classifier>
+                            <mainClass>
+                                com.github.cinema.home.client.server.assembly.nt.Application
+                            </mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
