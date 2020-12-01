@@ -51,7 +51,6 @@ public class NetworkApiMappings {
                     TmdbCompany.of(3590, "BBC Knowledge"),
                     TmdbCompany.of(3655, "BBC Television Centre"),
                     TmdbCompany.of(3660, "BBC South Africa"),
-                    TmdbCompany.of(3700, "BBC (Dup)"),
                     TmdbCompany.of(3859, "BBC Earth")))
             .put(NetworkGroup.CBS, asSet(
                     TmdbCompany.of(16, "CBS"),
@@ -88,7 +87,6 @@ public class NetworkApiMappings {
                     TmdbCompany.of(2991, "Playhouse Disney"),
                     TmdbCompany.of(3408, "Disney Channel"),
                     TmdbCompany.of(3874, "Disney Channel "),
-                    TmdbCompany.of(3901, "Disney Channel"),
                     TmdbCompany.of(3919, "Disney+ Hotstar"),
                     TmdbCompany.of(4006, "Disney Channel"),
                     TmdbCompany.of(4011, "Disney Junior (PT)")))

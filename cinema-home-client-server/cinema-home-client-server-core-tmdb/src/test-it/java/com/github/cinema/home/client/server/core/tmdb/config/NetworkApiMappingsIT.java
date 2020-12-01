@@ -12,6 +12,7 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -37,20 +38,24 @@ public class NetworkApiMappingsIT {
     }
 
     private TmdbCompany getNetworkDetails(int id) {
-        URI uri = UriComponentsBuilder.newInstance()
-                .scheme("https")
-                .host("api.themoviedb.org")
-                .pathSegment("3")
-                .pathSegment("network")
-                .path(String.valueOf(id))
-                .queryParam("api_key", this.properties.getApiKey())
-                .queryParam("language", "en")
-                .build().toUri();
-        return this.template.exchange(
-                uri,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<TmdbCompany>() {
-                }).getBody();
+        try {
+            URI uri = UriComponentsBuilder.newInstance()
+                    .scheme("https")
+                    .host("api.themoviedb.org")
+                    .pathSegment("3")
+                    .pathSegment("network")
+                    .path(String.valueOf(id))
+                    .queryParam("api_key", this.properties.getApiKey())
+                    .queryParam("language", "en")
+                    .build().toUri();
+            return this.template.exchange(
+                    uri,
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<TmdbCompany>() {
+                    }).getBody();
+        } catch (HttpClientErrorException e) {
+            throw new IllegalArgumentException(String.format("Network with id: '%s' failed!", id), e);
+        }
     }
 }
