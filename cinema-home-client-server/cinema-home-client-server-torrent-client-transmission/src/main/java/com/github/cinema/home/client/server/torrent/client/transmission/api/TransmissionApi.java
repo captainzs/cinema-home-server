@@ -31,7 +31,6 @@ public class TransmissionApi {
     public Torrent addTorrent(URL url) throws ServiceErrorException, InvalidArgumentException {
         Map<String, Object> arguments = new HashMap<>();
         arguments.put("paused", true);
-        arguments.put("download-dir", this.properties.getDownloadDirectory().toAbsolutePath().toString());
         arguments.put("filename", url.toString());
         Response response = this.client.doRequest(Request.builder()
                 .method(Method.ADD_TORRENT)
