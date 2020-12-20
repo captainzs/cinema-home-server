@@ -37,7 +37,7 @@ public class NcoreTorrentBrowser implements TorrentBrowser {
     }
 
     @Override
-    public List<MovieNfo> findMovies(SearchFilter filter, int page) throws ServiceErrorException, InvalidArgumentException {
+    public List<MovieNfo> findMovies(SearchFilter filter, int page) throws ServiceErrorException {
         URL url = this.urlMaker.searchUrl(filter, page, MediaType.MOVIE);
         try {
             Document html = this.pageLoader.load(url);
@@ -48,7 +48,7 @@ public class NcoreTorrentBrowser implements TorrentBrowser {
     }
 
     @Override
-    public List<ShowNfo> findShows(SearchFilter filter, int page) throws ServiceErrorException, InvalidArgumentException {
+    public List<ShowNfo> findShows(SearchFilter filter, int page) throws ServiceErrorException {
         URL url = this.urlMaker.searchUrl(filter, page, MediaType.SHOW);
         try {
             Document html = this.pageLoader.load(url);
@@ -59,7 +59,7 @@ public class NcoreTorrentBrowser implements TorrentBrowser {
     }
 
     @Override
-    public Optional<MovieNfo> findMovie(ImdbId id, int page) throws ServiceErrorException, InvalidArgumentException {
+    public Optional<MovieNfo> findMovie(ImdbId id, int page) throws ServiceErrorException {
         MovieNfo result = null;
         URL url = this.urlMaker.searchUrl(id, page, MediaType.MOVIE);
         try {
@@ -75,7 +75,7 @@ public class NcoreTorrentBrowser implements TorrentBrowser {
     }
 
     @Override
-    public Optional<ShowNfo> findShow(ImdbId id, int page) throws ServiceErrorException, InvalidArgumentException {
+    public Optional<ShowNfo> findShow(ImdbId id, int page) throws ServiceErrorException {
         ShowNfo result = null;
         URL url = this.urlMaker.searchUrl(id, page, MediaType.SHOW);
         try {

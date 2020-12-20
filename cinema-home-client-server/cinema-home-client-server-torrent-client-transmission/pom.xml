@@ -8,22 +8,17 @@
         <version>${revision}</version>
     </parent>
 
-    <artifactId>cinema-home-client-server-tracker-ncore</artifactId>
+    <artifactId>cinema-home-client-server-torrent-client-transmission</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.github</groupId>
-            <artifactId>cinema-home-client-server-tracker-api</artifactId>
-            <version>${revision}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github</groupId>
-            <artifactId>cinema-home-client-server-torrent-title</artifactId>
-            <version>${revision}</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github</groupId>
+            <artifactId>cinema-home-client-server-torrent-client-api</artifactId>
+            <version>${revision}</version>
         </dependency>
     </dependencies>
 </project>

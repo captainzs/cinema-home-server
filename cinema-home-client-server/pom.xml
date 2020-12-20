@@ -28,9 +28,11 @@
         <module>cinema-home-client-server-core</module>
         <module>cinema-home-client-server-core-fanart</module>
         <module>cinema-home-client-server-core-tmdb</module>
+        <module>cinema-home-client-server-torrent-client-api</module>
+        <module>cinema-home-client-server-torrent-client-transmission</module>
+        <module>cinema-home-client-server-torrent-title</module>
         <module>cinema-home-client-server-tracker-api</module>
         <module>cinema-home-client-server-tracker-ncore</module>
-        <module>cinema-home-client-server-torrent-title</module>
     </modules>
 
     <build>
@@ -97,6 +99,10 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>29.0-jre</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
         </dependency>
     </dependencies>
 </project>

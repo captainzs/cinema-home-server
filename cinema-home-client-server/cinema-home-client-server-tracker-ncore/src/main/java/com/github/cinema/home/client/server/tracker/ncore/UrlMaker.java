@@ -1,6 +1,5 @@
 package com.github.cinema.home.client.server.tracker.ncore;
 
-import com.github.cinema.home.client.server.common.exceptions.InvalidArgumentException;
 import com.github.cinema.home.client.server.common.exceptions.InvalidConfigurationException;
 import com.github.cinema.home.client.server.common.types.SearchFilter;
 import com.github.cinema.home.client.server.common.types.SortBy;
@@ -35,7 +34,7 @@ public class UrlMaker {
         }
     }
 
-    public URL searchUrl(SearchFilter filter, int page, MediaType type) throws InvalidArgumentException {
+    public URL searchUrl(SearchFilter filter, int page, MediaType type) {
         if (page < 1) {
             page = 1;
         }
@@ -55,12 +54,12 @@ public class UrlMaker {
                     .queryParam("miben", "name")
                     .build().toUri().toURL();
         } catch (MalformedURLException e) {
-            throw new InvalidArgumentException(
+            throw new InvalidConfigurationException(
                     String.format("Search-page url is malformed! Given filters '%s' or page '%d' or type '%s' is possibly invalid!", filter, page, type), e);
         }
     }
 
-    public URL searchUrl(ImdbId id, int page, MediaType type) throws InvalidArgumentException {
+    public URL searchUrl(ImdbId id, int page, MediaType type) {
         if (page < 1) {
             page = 1;
         }
@@ -75,19 +74,32 @@ public class UrlMaker {
                     .queryParam("miben", "imdb")
                     .build().toUri().toURL();
         } catch (MalformedURLException e) {
-            throw new InvalidArgumentException(
+            throw new InvalidConfigurationException(
                     String.format("Search-page url is malformed! Given imdb-id '%s' or page '%d' or type '%s' is possibly invalid!", id, page, type), e);
         }
     }
 
-    public URL detailsUrl(String ncoreId) throws InvalidArgumentException {
+    public URL detailsUrl(String ncoreId) {
         try {
             return UriComponentsBuilder.newInstance().scheme("https").host("ncore.cc").path("torrents.php")
                     .queryParam("action", "details")
-                    .queryParam("amp;id", ncoreId)
+                    .queryParam("id", ncoreId)
                     .build().toUri().toURL();
         } catch (MalformedURLException e) {
-            throw new InvalidArgumentException(String.format("Details-page url is malformed! Given ncore-id '%s' is possibly invalid!", ncoreId), e);
+            throw new InvalidConfigurationException(String.format("Details-page url is malformed! Given ncore-id '%s' is possibly invalid!", ncoreId), e);
+        }
+    }
+
+
+    public URL downloadUrl(String ncoreId, String token) {
+        try {
+            return UriComponentsBuilder.newInstance().scheme("https").host("ncore.cc").path("torrents.php")
+                    .queryParam("action", "download")
+                    .queryParam("id", ncoreId)
+                    .queryParam("key", token)
+                    .build().toUri().toURL();
+        } catch (MalformedURLException e) {
+            throw new InvalidConfigurationException(String.format("Torrent download url is malformed! Given ncore-id '%s' or token '%s' is possibly invalid!", ncoreId, token), e);
         }
     }
 }

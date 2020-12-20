@@ -49,5 +49,15 @@
             <artifactId>cinema-home-client-server-core-tmdb</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>com.github</groupId>
+            <artifactId>cinema-home-client-server-torrent-client-api</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github</groupId>
+            <artifactId>cinema-home-client-server-torrent-title</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 </project>
