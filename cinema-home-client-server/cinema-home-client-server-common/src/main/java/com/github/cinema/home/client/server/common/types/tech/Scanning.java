@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Optional;
 
 public enum Scanning {
+    //TODO upper-case P exists sometimes
     INTERLACED("i"),
     PROGRESSIVE("p");
 

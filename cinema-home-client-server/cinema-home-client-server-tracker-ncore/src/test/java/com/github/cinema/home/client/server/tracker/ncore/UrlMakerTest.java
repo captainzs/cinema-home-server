@@ -1,6 +1,5 @@
 package com.github.cinema.home.client.server.tracker.ncore;
 
-import com.github.cinema.home.client.server.common.exceptions.InvalidArgumentException;
 import com.github.cinema.home.client.server.common.types.SearchFilter;
 import com.github.cinema.home.client.server.common.types.SortBy;
 import com.github.cinema.home.client.server.common.types.SortOrder;
@@ -39,7 +38,7 @@ public class UrlMakerTest {
     }
 
     @Test
-    public void givenSearchFilter_whenGetSearchUrlForMovies_assertUrl() throws InvalidArgumentException {
+    public void givenSearchFilter_whenGetSearchUrlForMovies_assertUrl() {
         SearchFilter filter = Mockito.mock(SearchFilter.class);
         Mockito.when(filter.getSubText()).thenReturn("MyMovie");
         Mockito.when(filter.getSortBy()).thenReturn(SortBy.POPULARITY);
@@ -58,7 +57,7 @@ public class UrlMakerTest {
     }
 
     @Test
-    public void givenSearchFilter_whenGetSearchUrlForShows_assertUrl() throws InvalidArgumentException {
+    public void givenSearchFilter_whenGetSearchUrlForShows_assertUrl() {
         SearchFilter filter = Mockito.mock(SearchFilter.class);
         Mockito.when(filter.getSubText()).thenReturn("");
         Mockito.when(filter.getSortBy()).thenReturn(SortBy.POPULARITY);
@@ -77,7 +76,7 @@ public class UrlMakerTest {
     }
 
     @Test
-    public void givenImdbId_whenGetSearchUrlForMovies_assertUrl() throws InvalidArgumentException {
+    public void givenImdbId_whenGetSearchUrlForMovies_assertUrl() {
         String url = this.objectUnderTest.searchUrl(ImdbId.of("tt1111"), 2, MediaType.MOVIE).toString();
         MatcherAssert.assertThat(url, Matchers.containsString("oldal=2"));
         MatcherAssert.assertThat(url, Matchers.containsString("miszerint=seeders"));
@@ -89,7 +88,7 @@ public class UrlMakerTest {
     }
 
     @Test
-    public void givenImdbId_whenGetSearchUrlForShows_assertUrl() throws InvalidArgumentException {
+    public void givenImdbId_whenGetSearchUrlForShows_assertUrl() {
         String url = this.objectUnderTest.searchUrl(ImdbId.of("tt1111"), 22, MediaType.SHOW).toString();
         MatcherAssert.assertThat(url, Matchers.containsString("oldal=22"));
         MatcherAssert.assertThat(url, Matchers.containsString("miszerint=seeders"));
@@ -101,10 +100,10 @@ public class UrlMakerTest {
     }
 
     @Test
-    public void givenNcoreId_whenGetDetailsUrl_assertUrl() throws InvalidArgumentException {
+    public void givenNcoreId_whenGetDetailsUrl_assertUrl() {
         String url = this.objectUnderTest.detailsUrl("32589").toString();
         MatcherAssert.assertThat(url, Matchers.containsString("action=details"));
-        MatcherAssert.assertThat(url, Matchers.containsString("amp;id=32589"));
+        MatcherAssert.assertThat(url, Matchers.containsString("id=32589"));
         MatcherAssert.assertThat(url, Matchers.not(Matchers.containsString("null")));
     }
 }

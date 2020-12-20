@@ -50,7 +50,7 @@ public class SearchApiIT {
         Assert.assertEquals("The Shawshank Redemption", movie.getOriginalTitle());
         Assert.assertTrue(movie.getOverview().length() > 100);
         Assert.assertTrue(movie.getPopularity() > 10.0);
-        Assert.assertEquals("/5KCVkau1HEl7ZzfPsKAPM0sMiKc.jpg", movie.getPosterPath());
+        Assert.assertFalse(movie.getPosterPath().isEmpty());
         Assert.assertNull(movie.getProductionCompanies());
         Assert.assertNull(movie.getProductionCountries());
         Assert.assertNull(movie.getRuntime());

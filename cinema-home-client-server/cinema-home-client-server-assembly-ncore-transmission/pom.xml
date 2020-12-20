@@ -22,6 +22,11 @@
             <artifactId>cinema-home-client-server-tracker-ncore</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>com.github</groupId>
+            <artifactId>cinema-home-client-server-torrent-client-transmission</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 
     <build>

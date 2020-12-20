@@ -10,6 +10,7 @@ import com.github.cinema.home.client.server.common.types.media.ShowNfo;
 import com.github.cinema.home.client.server.common.types.media.TmdbId;
 import com.github.cinema.home.client.server.core.bll.CollectionService;
 import com.github.cinema.home.client.server.core.bll.DetailsService;
+import com.github.cinema.home.client.server.core.bll.DownloadService;
 import com.github.cinema.home.client.server.core.bll.NetworkService;
 import com.github.cinema.home.client.server.core.bll.RecommendService;
 import com.github.cinema.home.client.server.core.bll.SearchService;
@@ -41,11 +42,12 @@ public class ClientController {
     private final SimilarService similarService;
     private final CollectionService collectionService;
     private final TorrentService torrentService;
+    private final DownloadService downloadService;
 
     @Autowired
     public ClientController(SearchService searchService, NetworkService networkService, RecommendService recommendService,
                             DetailsService detailsService, SimilarService similarService, CollectionService collectionService,
-                            TorrentService torrentService) {
+                            TorrentService torrentService, DownloadService downloadService) {
         this.searchService = searchService;
         this.networkService = networkService;
         this.recommendService = recommendService;
@@ -53,6 +55,7 @@ public class ClientController {
         this.similarService = similarService;
         this.collectionService = collectionService;
         this.torrentService = torrentService;
+        this.downloadService = downloadService;
     }
 
     @RequestMapping(value = "/search/movies", method = RequestMethod.POST)
@@ -157,5 +160,27 @@ public class ClientController {
     @RequestMapping(value = "/data/{imdbId}", method = RequestMethod.POST)
     public MediaDynamicData postForDynamicData(@PathVariable ImdbId imdbId) {
         return MediaDynamicData.builder().isFavored(true).build();
+    }
+
+    @RequestMapping(value = "/movie/release/{torrentId}", method = RequestMethod.POST)
+    public void postForMovieReleaseAsync(@PathVariable String torrentId)
+            throws ServiceErrorException, InvalidArgumentException {
+        this.downloadService.downloadFull(torrentId);
+    }
+
+    @RequestMapping(value = "/show/release/{torrentId}", method = RequestMethod.POST)
+    public void postForShowReleaseAsync(@PathVariable String torrentId,
+                                        @RequestParam(required = false) Integer seasonNo,
+                                        @RequestParam(required = false) Integer episodeNo)
+            throws ServiceErrorException, InvalidArgumentException {
+        if (seasonNo == null && episodeNo == null) {
+            this.downloadService.downloadFull(torrentId);
+        } else if (seasonNo != null && episodeNo == null) {
+            this.downloadService.downloadSeason(torrentId, seasonNo);
+        } else if (seasonNo != null) {
+            this.downloadService.downloadEpisode(torrentId, seasonNo, episodeNo);
+        } else {
+            throw new IllegalArgumentException("Invalid download arguments! Show season number has to be given if episode number is given!");
+        }
     }
 }

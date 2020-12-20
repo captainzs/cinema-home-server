@@ -6,8 +6,8 @@ import com.github.cinema.home.client.server.core.tmdb.types.TmdbCompany;
 import com.github.cinema.home.client.server.core.tmdb.types.TmdbGenre;
 import com.github.cinema.home.client.server.core.tmdb.types.TmdbMovie;
 import com.github.cinema.home.client.server.core.tmdb.types.TmdbSeason;
-import com.github.cinema.home.client.server.core.tmdb.types.TmdbVideo;
 import com.github.cinema.home.client.server.core.tmdb.types.TmdbShow;
+import com.github.cinema.home.client.server.core.tmdb.types.TmdbVideo;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -50,7 +50,7 @@ public class DetailsApiIT {
         Assert.assertEquals("The Shawshank Redemption", movie.getOriginalTitle());
         Assert.assertTrue(movie.getOverview().length() > 100);
         Assert.assertTrue(movie.getPopularity() > 10.0);
-        Assert.assertEquals("/5KCVkau1HEl7ZzfPsKAPM0sMiKc.jpg", movie.getPosterPath());
+        Assert.assertFalse(movie.getPosterPath().isEmpty());
         Assert.assertEquals(1, movie.getProductionCompanies().size());
         Assert.assertEquals(97, movie.getProductionCompanies().get(0).getId());
         Assert.assertEquals(1, movie.getProductionCountries().size());
